@@ -28,7 +28,7 @@ const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 // generate scoped name for css-module and react-css-module
-const generateScopedName = '[name]__[local]___[hash:base64:5]'
+const generateScopedName = '[name]__[local]___[hash:base64:5]';
 
 
 // Assert this just to be safe.
