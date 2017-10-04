@@ -1,7 +1,6 @@
 import React from 'react'
 import ChaletImage from '../assets/Chalet.jpg'
-import './HomeView.scss'
-import './HomeView.mcss'
+import './HomeView.css'
 
 export const HomeView = () => (
   <div styleName='wrapper'>

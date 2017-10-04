@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+
+:global(.chalet) {
+  display: block;
+  width: 500px;
+  margin: 4rem auto 1rem;
+}
+
+:global(.source) {
+  font-style: italic;
+}
