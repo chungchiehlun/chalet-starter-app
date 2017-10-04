@@ -27,6 +27,9 @@ const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 const publicUrl = publicPath.slice(0, -1);
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
+// generate scoped name for css-module and react-css-module
+const generateScopedName = '[name]__[local]___[hash:base64:5]'
+
 
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
@@ -90,7 +93,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -121,7 +124,7 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -149,8 +152,16 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+
               compact: true,
+              plugins: [
+                [
+                  'react-css-modules',
+                  {
+                    generateScopedName,
+                  },
+                ],
+              ],
             },
           },
           // The notation here is somewhat confusing.
@@ -167,6 +178,7 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.css$/,
+            exclude: paths.appNodeModules,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -187,6 +199,11 @@ module.exports = {
                         // https://github.com/facebookincubator/create-react-app/issues/2677
                         ident: 'postcss',
                         plugins: () => [
+                          require('lost'),
+                          require('postcss-nested'),
+                          require('postcss-modules')({
+                            generateScopedName,
+                          }),
                           require('postcss-flexbugs-fixes'),
                           autoprefixer({
                             browsers: [
@@ -198,6 +215,28 @@ module.exports = {
                             flexbox: 'no-2009',
                           }),
                         ],
+                      },
+                    },
+                  ],
+                },
+                extractTextPluginOptions
+              )
+            ),
+            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.css$/,
+            include: paths.appNodeModules,
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: require.resolve('style-loader'),
+                  use: [
+                    {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                        minimize: true,
+                        sourceMap: shouldUseSourceMap,
                       },
                     },
                   ],

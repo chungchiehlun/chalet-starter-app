@@ -21,6 +21,8 @@ const publicPath = '/';
 const publicUrl = '';
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
+// generate scoped name for css-module and react-css-module
+const generateScopedName = '[name]__[local]___[hash:base64:5]'
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -86,7 +88,7 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -117,7 +119,7 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -146,11 +148,19 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
               cacheDirectory: true,
+              plugins: [
+                [
+                  'react-css-modules',
+                  {
+                    generateScopedName,
+                  },
+                ],
+              ],
             },
           },
           // "postcss" loader applies autoprefixer to our CSS.
@@ -160,6 +170,7 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           {
             test: /\.css$/,
+            exclude: paths.appNodeModules,
             use: [
               require.resolve('style-loader'),
               {
@@ -175,6 +186,11 @@ module.exports = {
                   // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
                   plugins: () => [
+                    require('lost'),
+                    require('postcss-nested'),
+                    require('postcss-modules')({
+                      generateScopedName,
+                    }),
                     require('postcss-flexbugs-fixes'),
                     autoprefixer({
                       browsers: [
@@ -187,6 +203,16 @@ module.exports = {
                     }),
                   ],
                 },
+              },
+            ]
+          },
+          {
+            test: /\.css$/,
+            include: paths.appNodeModules,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
               },
             ],
           },
