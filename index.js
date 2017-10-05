@@ -2,16 +2,18 @@
 
 'use strict';
 
-const program = require('commander');
+const commander = require('commander');
 const chalk = require('chalk');
-const { spawn } = require('child_process');
+const spawn = require('cross-spawn');
 const path = require('path');
-
-const scriptsVersion = 'starter-scripts'
+const packageJson = require('./package.json');
+const scriptsVersion = 'starter-scripts';
+const execSync = require('child_process').execSync;
 
 let projectName;
 
-program
+const program = new commander.Command(packageJson.name)
+  .version(packageJson.version)
   .usage(`${chalk.green('<project-directory>')}`)
   .description(`
     Create your own app based on ${chalk.cyan('chalet-starter-app')}
@@ -20,6 +22,15 @@ program
   .option('--plain', '   use plain tempalate from create-react-app', true)
   .action((name) => {
     projectName = name
+    try {
+      execSync('create-react-app --version');
+    } catch(err) {
+      console.log(`Please install ${chalk.cyan('create-react-app')} once globally.`);
+      console.log();
+      console.log('For example:');
+      console.log(`  ${chalk.cyan('yarn global add create-react-app')}`);
+      process.exit(1);
+    }
   })
   .on('--help', () => {
     console.log();
@@ -43,21 +54,13 @@ if (typeof projectName === 'undefined') {
   process.exit(1);
 }
 
-if (program.plain) {
-  spawn(`
-    create-react-app ${projectName} \
-     --scripts-version ${scriptsVersion}
-  `, {
-    stdio: 'inherit',
-    shell: true,
-  });
-} else {
-  spawn(`
-    create-react-app ${projectName} \
-     --internal-testing-template ${path.join(__dirname, 'template')} \
-     --scripts-version ${scriptsVersion}
-  `, {
-    stdio: 'inherit',
-    shell: true,
-  });
+start();
+
+function start() {
+  let args = [`${projectName}`, '--scripts-version', `${scriptsVersion}`]
+  if (!program.plain) {
+    args.push('--internal-testing-template')
+    args.push(`${path.join(__dirname, 'template')}`)
+  }
+  spawn('create-react-app', args, { stdio: 'inherit' });
 }
