@@ -22,7 +22,7 @@ npm start
 
 Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 
-![Chalet-starter-app Banner](https://raw.githubusercontent.com/chungchiehlun/chalet-starter-app/master/assets/chalet.png)
+<img src='https://raw.githubusercontent.com/chungchiehlun/chalet-starter-app/master/assets/chalet.png' width=350 />
 
 
 ## Project-based Feature
