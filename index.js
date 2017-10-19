@@ -60,7 +60,7 @@ function start() {
   let args = [`${projectName}`, '--scripts-version', `${scriptsVersion}`]
   if (!program.plain) {
     args.push('--internal-testing-template')
-    args.push(`${path.join(__dirname, 'template')}`)
+    args.push(`${path.join(__dirname, 'template', 'chalet')}`)
   }
   spawn('create-react-app', args, { stdio: 'inherit' });
 }
