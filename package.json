@@ -1,7 +1,7 @@
 {
   "name": "create-starter-app",
   "description": "Create production-based apps with no build configuration.",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "keywords": [
     "react",
     "reactjs",
