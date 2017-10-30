@@ -18,6 +18,15 @@
   "bin": {
     "create-starter-app": "./index.js"
   },
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "template/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --trailing-comma es5 --write",
+      "git add"
+    ]
+  },
   "dependencies": {
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
@@ -30,6 +39,9 @@
     "eslint-plugin-flowtype": "^2.34.1",
     "eslint-plugin-import": "^2.6.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0"
+    "eslint-plugin-react": "^7.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "prettier": "^1.7.4"
   }
 }

@@ -22,9 +22,11 @@ const program = new commander.Command(`${chalk.cyan(packageJson.name)}`)
       execSync('create-react-app --version');
     } catch (err) {
       console.log();
-      console.log(` ${chalk.cyan(packageJson.name)} was based on create-react-app.`);
+      console.log(
+        ` ${chalk.cyan(packageJson.name)} was based on create-react-app.`
+      );
       console.log();
-      console.log(` Please install create-react-app at first.`)
+      console.log(` Please install create-react-app at first.`);
       console.log();
       console.log(' For example:');
       console.log();

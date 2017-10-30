@@ -1,36 +1,37 @@
-import React from 'react'
-import { injectReducer } from '../../store/reducers'
+import React from 'react';
+import { injectReducer } from '../../store/reducers';
 
 function async(importComponent, importReducer, store) {
   return class extends React.Component {
     constructor(props) {
-      super(props)
+      super(props);
       this.state = {
         component: null,
-        reducer: null
-      }
+        reducer: null,
+      };
     }
     async componentDidMount() {
-      const { default: component } = await importComponent()
-      const { default: reducer } = await importReducer()
+      const { default: component } = await importComponent();
+      const { default: reducer } = await importReducer();
       this.setState({
         component,
-        reducer
-      })
+        reducer,
+      });
     }
     render() {
-      const { reducer, component } = this.state
+      const { reducer, component } = this.state;
       if (reducer) {
         /*  Add the reducer to the store on key 'counter'  */
-        injectReducer(store, { key: 'counter', reducer })
+        injectReducer(store, { key: 'counter', reducer });
       }
-      return component ? React.createElement(component, this.props) : null
+      return component ? React.createElement(component, this.props) : null;
     }
-  }
+  };
 }
 
-export default (store) => async(
-  /*
+export default store =>
+  async(
+    /*
     - import() calls use promises internally. If using it with older browers, remember
     to shim Promise using a polyfill.
 
@@ -39,7 +40,8 @@ export default (store) => async(
 
     see (https://webpack.js.org/api/module-methods/#import-) for more information
    */
-  () => import(/* webpackChunkName: 'counter' */ './containers/CounterContainer'),
-  () => import(/* webpackChunkName: 'counter' */ './modules/counter'),
-  store
-)
+    () =>
+      import(/* webpackChunkName: 'counter' */ './containers/CounterContainer'),
+    () => import(/* webpackChunkName: 'counter' */ './modules/counter'),
+    store
+  );

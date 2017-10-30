@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
-export const makeRootReducer = (asyncReducers) => {
+export const makeRootReducer = asyncReducers => {
   return combineReducers({
     /*
       The store import counter reducer dynamically when the client directs
@@ -11,18 +11,18 @@ export const makeRootReducer = (asyncReducers) => {
     app: (state = {}, action) => {
       switch (action.type) {
         default:
-          return state
+          return state;
       }
     },
-    ...asyncReducers
-  })
-}
+    ...asyncReducers,
+  });
+};
 
 export const injectReducer = (store, { key, reducer }) => {
-  if (Object.hasOwnProperty.call(store.asyncReducers, key)) return
+  if (Object.hasOwnProperty.call(store.asyncReducers, key)) return;
 
-  store.asyncReducers[key] = reducer
-  store.replaceReducer(makeRootReducer(store.asyncReducers))
-}
+  store.asyncReducers[key] = reducer;
+  store.replaceReducer(makeRootReducer(store.asyncReducers));
+};
 
-export default makeRootReducer
+export default makeRootReducer;

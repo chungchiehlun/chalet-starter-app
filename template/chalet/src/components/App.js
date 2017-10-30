@@ -1,21 +1,21 @@
-import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import PropTypes from 'prop-types'
-import PageLayout from '../layouts/PageLayout'
-import Home from '../routes/Home'
-import Counter from '../routes/Counter'
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
+import PageLayout from '../layouts/PageLayout';
+import Home from '../routes/Home';
+import Counter from '../routes/Counter';
 
 class App extends React.Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
+  };
+
+  shouldComponentUpdate() {
+    return false;
   }
 
-  shouldComponentUpdate () {
-    return false
-  }
-
-  render () {
+  render() {
     return (
       <Provider store={this.props.store}>
         <BrowserRouter>
@@ -28,8 +28,8 @@ class App extends React.Component {
           </div>
         </BrowserRouter>
       </Provider>
-    )
+    );
   }
 }
 
-export default App
+export default App;
