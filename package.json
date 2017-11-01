@@ -9,7 +9,8 @@
     "boilerplate",
     "create-react-app"
   ],
-  "author": "Jay Chung <wuceh14678@gmail.com> (https://github.com/chungchiehlun)",
+  "author":
+    "Jay Chung <wuceh14678@gmail.com> (https://github.com/chungchiehlun)",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -22,7 +23,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "template/**/*.{js,jsx,json,css}": [
+    "*.{js,jsx,css}": [
       "prettier --single-quote --trailing-comma es5 --write",
       "git add"
     ]
