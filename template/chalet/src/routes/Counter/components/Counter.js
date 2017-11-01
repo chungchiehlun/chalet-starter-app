@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Counter.css';
 
 export const Counter = ({ counter, increment, doubleAsync }) => (
-  <div styleName="wrapper">
+  <div styleName="counter">
     <h2>Counter: {counter}</h2>
     <button styleName="btn" onClick={increment}>
       Increment
@@ -13,6 +13,7 @@ export const Counter = ({ counter, increment, doubleAsync }) => (
     </button>
   </div>
 );
+
 Counter.propTypes = {
   counter: PropTypes.number.isRequired,
   increment: PropTypes.func.isRequired,

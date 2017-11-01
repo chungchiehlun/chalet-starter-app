@@ -1,16 +1,16 @@
-.wrapper {
+.home {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
 }
 
-
-:global(.chalet) {
+.chalet {
   display: block;
-  width: 500px;
-  margin: 4rem auto 1rem;
+  width: 450px;
+  margin: 15px auto;
 }
 
-:global(.source) {
+.source {
+  display: flex;
   font-style: italic;
 }

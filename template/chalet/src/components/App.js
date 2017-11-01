@@ -6,6 +6,8 @@ import PageLayout from '../layouts/PageLayout';
 import Home from '../routes/Home';
 import Counter from '../routes/Counter';
 
+import './App.css';
+
 class App extends React.Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
@@ -19,7 +21,7 @@ class App extends React.Component {
     return (
       <Provider store={this.props.store}>
         <BrowserRouter>
-          <div style={{ minHeight: '100vh', background: '#92e2fd' }}>
+          <div>
             <PageLayout />
             <Switch>
               <Route path="/" exact component={Home} />

@@ -1,0 +1,16 @@
+/* reset default styleshet */
+ul {
+  font-family: 'Roboto', sans-serif;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: block;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+}
