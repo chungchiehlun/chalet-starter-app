@@ -5,6 +5,8 @@
     "redux": "^3.7.2",
     "react-redux": "^5.0.6",
     "redux-thunk": "^2.2.0",
-    "normalize.css": "7.0.0"
+    "normalize.css": "7.0.0",
+    "react-router-redux": "^5.0.0-alpha.8",
+    "history": "^4.7.2"
   }
 }

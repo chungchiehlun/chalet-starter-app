@@ -1,19 +1,14 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 export const makeRootReducer = asyncReducers => {
   return combineReducers({
+    router: routerReducer,
     /*
-      The store import counter reducer dynamically when the client directs
-      to /counter. The "app" is just a workaround because combineReducers
-      can not accept empty reducer objects. In real app, you might have
-      initial reducer such as auth.
+      Async reducer means that the reducer function will be appended
+      to store when it was demanded. In our case, the "counter" reducer
+      will be appended when the route directed to /couter.
      */
-    app: (state = {}, action) => {
-      switch (action.type) {
-        default:
-          return state;
-      }
-    },
     ...asyncReducers,
   });
 };

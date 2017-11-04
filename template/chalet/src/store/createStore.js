@@ -4,13 +4,15 @@ import {
   createStore as createReduxStore,
 } from 'redux';
 import thunk from 'redux-thunk';
+import { routerMiddleware } from 'react-router-redux';
 import makeRootReducer from './reducers';
+import history from './history';
 
 const createStore = (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk];
+  const middleware = [thunk, routerMiddleware(history)];
 
   // ======================================================
   // Store Enhancers

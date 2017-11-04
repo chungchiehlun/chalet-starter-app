@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createStore from './store/createStore';
+import history from './store/history';
 import 'normalize.css';
 
 // Store Initialization
@@ -14,7 +15,7 @@ const MOUNT_NODE = document.getElementById('root');
 let render = () => {
   const App = require('./components/App').default;
 
-  ReactDOM.render(<App store={store} />, MOUNT_NODE);
+  ReactDOM.render(<App store={store} history={history} />, MOUNT_NODE);
 };
 
 render();

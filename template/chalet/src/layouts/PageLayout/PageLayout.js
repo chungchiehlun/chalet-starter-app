@@ -1,25 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import './PageLayout.css';
 
-export const PageLayout = () => (
+export const PageLayout = props => (
   <section>
     <ul styleName="navbar">
       <li>
-        <h1>Create Starter App</h1>
+        <h1>Chalet Template</h1>
       </li>
       <li>
-        <Link to="/" styleName="link">
+        <span styleName="link" onClick={() => props.directTo('/')}>
           Home
-        </Link>
+        </span>
       </li>
       <li>
-        <Link to="/counter" styleName="link">
+        <span styleName="link" onClick={() => props.directTo('/counter')}>
           Counter
-        </Link>
+        </span>
       </li>
     </ul>
   </section>
 );
 
-export default PageLayout;
+export default connect(null, dispatch => ({
+  directTo: path => {
+    dispatch(push(path));
+  },
+}))(PageLayout);

@@ -4,11 +4,7 @@ import './HomeView.css';
 
 export const HomeView = () => (
   <div styleName="home">
-    <img
-      alt="This is a duck, because Redux!"
-      styleName="chalet"
-      src={ChaletImage}
-    />
+    <img alt="chalet" styleName="chalet" src={ChaletImage} />
     <span styleName="source">
       {`Image originated from:`}
       <a href="https://goo.gl/hWSqjM">{'goo.gl/hWSqjM'}</a>

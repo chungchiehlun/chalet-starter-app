@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import PageLayout from '../layouts/PageLayout';
@@ -11,6 +12,7 @@ import './App.css';
 class App extends React.Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   shouldComponentUpdate() {
@@ -20,7 +22,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <BrowserRouter>
+        <ConnectedRouter history={this.props.history}>
           <div>
             <PageLayout />
             <Switch>
@@ -28,7 +30,7 @@ class App extends React.Component {
               <Route path="/counter" component={Counter(this.props.store)} />
             </Switch>
           </div>
-        </BrowserRouter>
+        </ConnectedRouter>
       </Provider>
     );
   }
