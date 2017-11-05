@@ -8,16 +8,23 @@ const packageJson = require('./package.json');
 const scriptsVersion = 'starter-scripts';
 const execSync = require('child_process').execSync;
 
-let projectName;
+let projectName, projectTemplate;
 
 const program = new commander.Command(`${chalk.cyan(packageJson.name)}`)
   .usage(`${chalk.green('<project-directory>')}`)
   .description(`  ${packageJson.description}`)
   .arguments('<project-directory> [option]')
-  .option('--plain', 'apply original template of create-react-app', true)
+  // Angled brackets (e.g. <cmd>) indicate required input.
+  // Square brackets (e.g. [env]) indicate optional input.
+  .option(
+    '-T, --template [template]',
+    'Choose available template, e.g., chalet.',
+    'chalet'
+  )
   .version(`${packageJson.version}`)
   .action(name => {
     projectName = name;
+
     try {
       execSync('create-react-app --version');
     } catch (err) {
@@ -64,13 +71,26 @@ if (typeof projectName === 'undefined') {
   process.exit(1);
 }
 
+// If getting unavailable template option, use 'chalet' as default.
+switch (program.template) {
+  case 'plain':
+    projectTemplate = 'plain';
+    break;
+  default:
+    projectTemplate = 'chalet';
+}
+
 start();
 
 function start() {
   let args = [`${projectName}`, '--scripts-version', `${scriptsVersion}`];
-  if (!program.plain) {
+  if (projectTemplate !== 'plain') {
     args.push('--internal-testing-template');
-    args.push(`${path.join(__dirname, 'template', 'chalet')}`);
+    args.push(`${path.join(__dirname, 'template', projectTemplate)}`);
   }
+  console.log();
+  console.log(
+    `Launch app based on template ${chalk.green(projectTemplate)}...`
+  );
   spawn('create-react-app', args, { stdio: 'inherit' });
 }
