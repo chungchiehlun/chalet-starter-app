@@ -1,48 +1,26 @@
 {
-  "name": "create-starter-app",
-  "description": "Create production-based apps with no build configuration.",
-  "version": "0.6.0",
-  "keywords": [
-    "react",
-    "reactjs",
-    "react-css-module",
-    "boilerplate",
-    "create-react-app"
-  ],
-  "author":
-    "Jay Chung <wuceh14678@gmail.com> (https://github.com/chungchiehlun)",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/chungchiehlun/create-starter-app.git"
-  },
-  "bin": {
-    "create-starter-app": "./index.js"
-  },
+  "private": true,
   "scripts": {
-    "precommit": "lint-staged"
+    "create-starter-app": "node tasks/csa.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-    "*.{js,jsx,css}": [
-      "prettier --single-quote --trailing-comma es5 --write",
+    "*.{js,json,css,md}": [
+      "prettier --write",
       "git add"
+    ],
+    "yarn.lock": [
+      "git rm --cached"
     ]
   },
-  "dependencies": {
-    "chalk": "^2.1.0",
-    "commander": "^2.11.0",
-    "cross-spawn": "^5.1.0"
-  },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.1.1",
-    "eslint-config-react-app": "^2.0.1",
-    "eslint-plugin-flowtype": "^2.34.1",
-    "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^4.3.0",
-    "prettier": "^1.7.4"
+    "fs-extra": "^7.0.0",
+    "husky": "^1.0.0-rc.14",
+    "lerna": "^3.3.0",
+    "lint-staged": "^7.2.2"
   }
 }
