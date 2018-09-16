@@ -1,0 +1,26 @@
+{
+  "name": "create-starter-app",
+  "description": "Create production-based apps with no build configuration.",
+  "version": "0.6.0",
+  "keywords": [
+    "react",
+    "reactjs",
+    "react-css-module",
+    "boilerplate",
+    "create-react-app"
+  ],
+  "author": "Jay Chung <wuceh14678@gmail.com> (https://github.com/chungchiehlun)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chungchiehlun/create-starter-app.git"
+  },
+  "bin": {
+    "create-starter-app": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "commander": "^2.11.0",
+    "cross-spawn": "^5.1.0"
+  }
+}
