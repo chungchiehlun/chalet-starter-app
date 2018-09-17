@@ -1,6 +1,11 @@
 {
   "private": true,
+  "name": "chalet",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
+    "publish": "node tasks/publish.js",
     "create-starter-app": "node tasks/csa.js"
   },
   "husky": {
