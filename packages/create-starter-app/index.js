@@ -24,6 +24,24 @@ const program = new commander.Command(`${chalk.cyan(packageJson.name)}`)
   .version(`${packageJson.version}`)
   .action(name => {
     projectName = name;
+
+    try {
+      execSync("create-react-app --version");
+    } catch (err) {
+      console.log();
+      console.log(
+        ` ${chalk.cyan(packageJson.name)} was based on create-react-app.`
+      );
+      console.log();
+      console.log(` Please install create-react-app at first.`);
+      console.log();
+      console.log(" For example:");
+      console.log();
+      console.log("   $ yarn global add create-react-app");
+      console.log(`   $ yarn global add ${chalk.cyan(packageJson.name)}`);
+      console.log();
+      process.exit(1);
+    }
   })
   .on("--help", () => {
     console.log();
@@ -74,5 +92,5 @@ function start() {
   console.log(
     `Launch app based on template ${chalk.green(projectTemplate)}...`
   );
-  spawn("npx create-react-app@1.5.2", args, { stdio: "inherit" });
+  spawn("create-react-app", args, { stdio: "inherit" });
 }
