@@ -11,7 +11,7 @@ execSync(`node ${buildChaletTemplatePath}`, {
   stdio: "inherit"
 });
 
-execSync(`lerna publish --no-git-tag-version --no-push`, {
+execSync(`lerna publish --no-push`, {
   cwd: __dirname,
   stdio: "inherit"
 });
