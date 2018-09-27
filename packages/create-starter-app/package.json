@@ -1,7 +1,7 @@
 {
   "name": "create-starter-app",
   "description": "Create production-based apps with no build configuration.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "keywords": [
     "react",
     "reactjs",
@@ -22,5 +22,6 @@
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
     "cross-spawn": "^5.1.0"
-  }
+  },
+  "gitHead": "c51a608a45b1913947ed156412660ab8642dc73e"
 }
