@@ -21,6 +21,15 @@ const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const paths = require("./paths");
 const getClientEnvironment = require("./env");
 const generateScopedName = "[path]__[name]__[local]";
+const autoprefixerConfig = {
+  browsers: [
+    ">1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "not ie < 9" // React doesn't support IE8 anyway
+  ],
+  flexbox: "no-2009"
+};
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -231,15 +240,7 @@ module.exports = {
                           require("postcss-flexbugs-fixes"),
                           require("postcss-preset-env")({
                             stage: 0,
-                            autoprefixer: {
-                              browsers: [
-                                ">1%",
-                                "last 4 versions",
-                                "Firefox ESR",
-                                "not ie < 9" // React doesn't support IE8 anyway
-                              ],
-                              flexbox: "no-2009"
-                            }
+                            autoprefixer: autoprefixerConfig
                           })
                         ]
                       }
@@ -253,7 +254,55 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            exclude: /\.module\.css$/,
+            exclude: [/\.module\.css$/, paths.appNodeModules],
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: {
+                    loader: require.resolve("style-loader"),
+                    options: {
+                      hmr: false
+                    }
+                  },
+                  use: [
+                    {
+                      loader: require.resolve("css-loader"),
+                      options: {
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: shouldUseSourceMap
+                      }
+                    },
+                    {
+                      loader: require.resolve("postcss-loader"),
+                      options: {
+                        // Necessary for external CSS imports to work
+                        // https://github.com/facebookincubator/create-react-app/issues/2677
+                        // ident: "postcss",
+                        plugins: () => [
+                          require("lost"),
+                          require("postcss-modules")({
+                            scopeBehaviour: "global",
+                            getJSON: () => {}
+                          }),
+                          require("postcss-flexbugs-fixes"),
+                          require("postcss-preset-env")({
+                            stage: 0,
+                            autoprefixer: autoprefixerConfig
+                          })
+                        ]
+                      }
+                    }
+                  ]
+                },
+                extractTextPluginOptions
+              )
+            )
+            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.css$/,
+            include: paths.appNodeModules,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -280,15 +329,7 @@ module.exports = {
                         ident: "postcss",
                         plugins: () => [
                           require("postcss-flexbugs-fixes"),
-                          autoprefixer({
-                            browsers: [
-                              ">1%",
-                              "last 4 versions",
-                              "Firefox ESR",
-                              "not ie < 9" // React doesn't support IE8 anyway
-                            ],
-                            flexbox: "no-2009"
-                          })
+                          autoprefixer(autoprefixerConfig)
                         ]
                       }
                     }

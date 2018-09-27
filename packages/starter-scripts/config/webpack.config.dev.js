@@ -20,6 +20,15 @@ const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const getClientEnvironment = require("./env");
 const paths = require("./paths");
 const generateScopedName = "[path]__[name]__[local]";
+const autoprefixerConfig = {
+  browsers: [
+    ">1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "not ie < 9" // React doesn't support IE8 anyway
+  ],
+  flexbox: "no-2009"
+};
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -213,15 +222,7 @@ module.exports = {
                     require("postcss-flexbugs-fixes"),
                     require("postcss-preset-env")({
                       stage: 0,
-                      autoprefixer: {
-                        browsers: [
-                          ">1%",
-                          "last 4 versions",
-                          "Firefox ESR",
-                          "not ie < 9" // React doesn't support IE8 anyway
-                        ],
-                        flexbox: "no-2009"
-                      }
+                      autoprefixer: autoprefixerConfig
                     })
                   ]
                 }
@@ -230,7 +231,40 @@ module.exports = {
           },
           {
             test: /\.css$/,
-            exclude: /\.module\.css$/,
+            exclude: [/\.module\.css$/, paths.appNodeModules],
+            use: [
+              require.resolve("style-loader"),
+              {
+                loader: require.resolve("css-loader"),
+                options: {
+                  importLoaders: 1
+                }
+              },
+              {
+                loader: require.resolve("postcss-loader"),
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  // ident: 'postcss',
+                  plugins: () => [
+                    require("lost"),
+                    require("postcss-modules")({
+                      scopeBehaviour: "global",
+                      getJSON: () => {}
+                    }),
+                    require("postcss-flexbugs-fixes"),
+                    require("postcss-preset-env")({
+                      stage: 0,
+                      autoprefixer: autoprefixerConfig
+                    })
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            test: /\.css$/,
+            include: paths.appNodeModules,
             use: [
               require.resolve("style-loader"),
               {
@@ -247,15 +281,7 @@ module.exports = {
                   ident: "postcss",
                   plugins: () => [
                     require("postcss-flexbugs-fixes"),
-                    autoprefixer({
-                      browsers: [
-                        ">1%",
-                        "last 4 versions",
-                        "Firefox ESR",
-                        "not ie < 9" // React doesn't support IE8 anyway
-                      ],
-                      flexbox: "no-2009"
-                    })
+                    autoprefixer(autoprefixerConfig)
                   ]
                 }
               }
