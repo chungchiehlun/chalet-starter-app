@@ -50,5 +50,3 @@ An usual flow for the test itself is something similar to:
 - add an `id` attribute in a target HTML tag in the feature itself
 
 - since `initDOM` returns a `Document` element, the previous `id` attribute is used to target the feature's DOM and `expect` accordingly
-
-These tests are run by **mocha** (why not **jest**? See [this issue](https://github.com/facebook/jest/issues/2288)) and the environments used are both `development` and `production`.
