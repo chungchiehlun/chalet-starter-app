@@ -1,7 +1,7 @@
 {
   "name": "chalet",
   "description": "Chalet Template",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
@@ -20,6 +20,6 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
-    "starter-scripts": "^1.1.1"
+    "starter-scripts": "^2.0.0"
   }
 }
