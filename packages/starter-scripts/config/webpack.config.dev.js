@@ -22,6 +22,7 @@ const paths = require("./paths");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const getCacheIdentifier = require("react-dev-utils/getCacheIdentifier");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
+const generateScopedName = require("./generateScopedName");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -57,12 +58,13 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
         // https://github.com/facebook/create-react-app/issues/2677
         ident: "postcss",
         plugins: () => [
+          require("lost"),
           require("postcss-flexbugs-fixes"),
           require("postcss-preset-env")({
             autoprefixer: {
               flexbox: "no-2009"
             },
-            stage: 3
+            stage: 0
           })
         ]
       }
@@ -252,6 +254,12 @@ module.exports = {
               ]),
               // @remove-on-eject-end
               plugins: [
+                [
+                  require.resolve("babel-plugin-react-css-modules"),
+                  {
+                    generateScopedName
+                  }
+                ],
                 [
                   require.resolve("babel-plugin-named-asset-import"),
                   {
