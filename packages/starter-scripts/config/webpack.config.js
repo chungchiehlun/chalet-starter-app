@@ -50,6 +50,8 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
+const generateScopedName = require("./generateScopedName");
+
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function(webpackEnv) {
@@ -100,12 +102,13 @@ module.exports = function(webpackEnv) {
           // https://github.com/facebook/create-react-app/issues/2677
           ident: "postcss",
           plugins: () => [
+            require("lost"),
             require("postcss-flexbugs-fixes"),
             require("postcss-preset-env")({
               autoprefixer: {
                 flexbox: "no-2009"
               },
-              stage: 3
+              stage: 0
             })
           ],
           sourceMap: isEnvProduction && shouldUseSourceMap
@@ -373,6 +376,12 @@ module.exports = function(webpackEnv) {
                 ),
                 // @remove-on-eject-end
                 plugins: [
+                  [
+                    require.resolve("babel-plugin-react-css-modules"),
+                    {
+                      generateScopedName
+                    }
+                  ],
                   [
                     require.resolve("babel-plugin-named-asset-import"),
                     {

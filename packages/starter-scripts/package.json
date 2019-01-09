@@ -1,8 +1,8 @@
 {
-  "name": "react-scripts",
+  "name": "starter-scripts",
   "version": "2.1.3",
-  "description": "Configuration and scripts for Create React App.",
-  "repository": "facebook/create-react-app",
+  "description": "Configuration and scripts for Create Starter App.",
+  "repository": "chungchiehlun/create-starter-app",
   "license": "MIT",
   "engines": {
     "node": ">=6"
@@ -70,7 +70,9 @@
     "webpack": "4.19.1",
     "webpack-dev-server": "3.1.14",
     "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3"
+    "workbox-webpack-plugin": "3.6.3",
+    "lost": "^8.3.0",
+    "babel-plugin-react-css-modules": "^3.4.2"
   },
   "devDependencies": {
     "react": "^16.3.2",
