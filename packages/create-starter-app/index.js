@@ -1,96 +1,58 @@
 #!/usr/bin/env node
 
-const commander = require("commander");
-const chalk = require("chalk");
-const spawn = require("cross-spawn");
-const path = require("path");
-const packageJson = require("./package.json");
-const scriptsVersion = "starter-scripts";
-const execSync = require("child_process").execSync;
+/**
+ * Copyright (c) 2015-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-let projectName, projectTemplate;
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   /!\ DO NOT MODIFY THIS FILE /!\
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+// create-react-app is installed globally on people's computers. This means
+// that it is extremely difficult to have them upgrade the version and
+// because there's only one global version installed, it is very prone to
+// breaking changes.
+//
+// The only job of create-react-app is to init the repository and then
+// forward all the commands to the local version of create-react-app.
+//
+// If you need to add a new command, please add it to the scripts/ folder.
+//
+// The only reason to modify this file is to add more warnings and
+// troubleshooting information for the `create-react-app` command.
+//
+// Do not make breaking changes! We absolutely don't want to have to
+// tell people to update their global version of create-react-app.
+//
+// Also be careful with new language features.
+// This file must work on Node 0.10+.
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//   /!\ DO NOT MODIFY THIS FILE /!\
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-const program = new commander.Command(`${chalk.cyan(packageJson.name)}`)
-  .usage(`${chalk.green("<project-directory>")}`)
-  .description(`  ${packageJson.description}`)
-  .arguments("<project-directory> [option]")
-  // Angled brackets (e.g. <cmd>) indicate required input.
-  // Square brackets (e.g. [env]) indicate optional input.
-  .option(
-    "-T, --template [template]",
-    "Choose available template, e.g., chalet.",
-    "chalet"
-  )
-  .version(`${packageJson.version}`)
-  .action(name => {
-    projectName = name;
+"use strict";
 
-    try {
-      execSync("create-react-app --version");
-    } catch (err) {
-      console.log();
-      console.log(
-        ` ${chalk.cyan(packageJson.name)} was based on create-react-app.`
-      );
-      console.log();
-      console.log(` Please install create-react-app at first.`);
-      console.log();
-      console.log(" For example:");
-      console.log();
-      console.log("   $ yarn global add create-react-app");
-      console.log(`   $ yarn global add ${chalk.cyan(packageJson.name)}`);
-      console.log();
-      process.exit(1);
-    }
-  })
-  .on("--help", () => {
-    console.log();
-    console.log(` Only ${chalk.green("<project-directory>")} is required.`);
-    console.log();
-  })
-  .parse(process.argv);
+var chalk = require("chalk");
 
-if (typeof projectName === "undefined") {
-  console.log();
-  console.error(" Please specify the project directory:");
-  console.log();
-  console.log(
-    `   ${chalk.cyan(program.name())} ${chalk.green("<project-directory>")}`
+var currentNodeVersion = process.versions.node;
+var semver = currentNodeVersion.split(".");
+var major = semver[0];
+
+if (major < 8) {
+  console.error(
+    chalk.red(
+      "You are running Node " +
+        currentNodeVersion +
+        ".\n" +
+        "Create React App requires Node 8 or higher. \n" +
+        "Please update your version of Node."
+    )
   );
-  console.log();
-  console.log(" For example:");
-  console.log();
-  console.log(
-    `   ${chalk.cyan(program.name())} ${chalk.green("my-awesome-app")}`
-  );
-  console.log();
-  console.log(
-    ` Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`
-  );
-  console.log();
   process.exit(1);
 }
 
-// If getting unavailable template option, use 'chalet' as default.
-switch (program.template) {
-  case "plain":
-    projectTemplate = "plain";
-    break;
-  default:
-    projectTemplate = "chalet";
-}
-
-start();
-
-function start() {
-  let args = [`${projectName}`, "--scripts-version", `${scriptsVersion}`];
-  if (projectTemplate !== "plain") {
-    args.push("--internal-testing-template");
-    args.push(`${path.join(__dirname, "template", projectTemplate)}`);
-  }
-  console.log();
-  console.log(
-    `Launch app based on template ${chalk.green(projectTemplate)}...`
-  );
-  spawn("create-react-app", args, { stdio: "inherit" });
-}
+require("./createReactApp");

@@ -1,27 +1,42 @@
 {
   "name": "create-starter-app",
-  "description": "Create production-based apps with no build configuration.",
-  "version": "1.2.0",
+  "version": "3.0.0",
   "keywords": [
-    "react",
-    "reactjs",
-    "css-module",
-    "postcss",
-    "create-react-app"
+    "react"
   ],
-  "author": "Jay Chung <wuceh14678@gmail.com> (https://github.com/chungchiehlun)",
-  "license": "MIT",
+  "description": "Create React apps with no build configuration.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chungchiehlun/create-starter-app.git"
+    "url": "https://github.com/chungchiehlun/create-starter-app.git",
+    "directory": "packages/create-starter-app"
   },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "bugs": {
+    "url": "https://github.com/chungchiehlun/create-starter-app/issues"
+  },
+  "files": [
+    "index.js",
+    "createReactApp.js",
+    "yarn.lock.cached"
+  ],
   "bin": {
     "create-starter-app": "./index.js"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
-    "commander": "^2.11.0",
-    "cross-spawn": "^5.1.0"
+    "chalk": "2.4.2",
+    "commander": "2.19.0",
+    "cross-spawn": "6.0.5",
+    "envinfo": "7.1.0",
+    "fs-extra": "7.0.1",
+    "hyperquest": "2.1.3",
+    "inquirer": "6.2.2",
+    "semver": "6.0.0",
+    "tar-pack": "3.4.1",
+    "tmp": "0.0.33",
+    "validate-npm-package-name": "3.0.0"
   },
-  "gitHead": "c51a608a45b1913947ed156412660ab8642dc73e"
+  "author": "Jay Chung <wuceh14678@gmail.com> (https://github.com/chungchiehlun)"
 }
