@@ -1,37 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//   /!\ DO NOT MODIFY THIS FILE /!\
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//
-// create-react-app is installed globally on people's computers. This means
-// that it is extremely difficult to have them upgrade the version and
-// because there's only one global version installed, it is very prone to
-// breaking changes.
-//
-// The only job of create-react-app is to init the repository and then
-// forward all the commands to the local version of create-react-app.
-//
-// If you need to add a new command, please add it to the scripts/ folder.
-//
-// The only reason to modify this file is to add more warnings and
-// troubleshooting information for the `create-react-app` command.
-//
-// Do not make breaking changes! We absolutely don't want to have to
-// tell people to update their global version of create-react-app.
-//
-// Also be careful with new language features.
-// This file must work on Node 6+.
-//
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//   /!\ DO NOT MODIFY THIS FILE /!\
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 "use strict";
 
 const chalk = require("chalk");
@@ -79,6 +45,7 @@ const program = new commander.Command(packageJson.name)
   .option("--use-npm")
   .option("--use-pnp")
   .option("--typescript")
+  .option("-T, --template <template>", "use a template")
   .allowUnknownOption()
   .on("--help", () => {
     console.log(`    Only ${chalk.green("<project-directory>")} is required.`);
@@ -117,7 +84,7 @@ const program = new commander.Command(packageJson.name)
     );
     console.log(
       `      ${chalk.cyan(
-        "https://github.com/facebook/create-react-app/issues/new"
+        "https://github.com/chungchiehlun/create-starter-app/issues/new"
       )}`
     );
     console.log();
@@ -133,7 +100,7 @@ if (program.info) {
         Binaries: ["Node", "npm", "Yarn"],
         Browsers: ["Chrome", "Edge", "Internet Explorer", "Firefox", "Safari"],
         npmPackages: ["react", "react-dom", "react-scripts"],
-        npmGlobalPackages: ["create-react-app"]
+        npmGlobalPackages: ["create-starter-app"]
       },
       {
         duplicates: true,
@@ -174,15 +141,29 @@ const hiddenProgram = new commander.Command()
   )
   .parse(process.argv);
 
-createApp(
-  projectName,
-  program.verbose,
-  program.scriptsVersion,
-  program.useNpm,
-  program.usePnp,
-  program.typescript,
-  hiddenProgram.internalTestingTemplate
-);
+const originalDirectory = process.cwd();
+
+if (program.template === "chalet") {
+  createApp(
+    projectName,
+    program.verbose,
+    "starter-scripts",
+    program.useNpm,
+    program.usePnp,
+    false,
+    path.join(__dirname, "template", `${program.template}`)
+  );
+} else {
+  createApp(
+    projectName,
+    program.verbose,
+    program.scriptsVersion,
+    program.useNpm,
+    program.usePnp,
+    program.typescript,
+    hiddenProgram.internalTestingTemplate
+  );
+}
 
 function createApp(
   name,
@@ -216,7 +197,6 @@ function createApp(
   );
 
   const useYarn = useNpm ? false : shouldUseYarn();
-  const originalDirectory = process.cwd();
   process.chdir(root);
   if (!useYarn && !checkThatNpmCanReadCwd()) {
     process.exit(1);

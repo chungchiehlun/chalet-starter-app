@@ -1,10 +1,15 @@
+#!/usr/bin/env node
+
+"use strict";
+
 const fs = require("fs-extra");
 const path = require("path");
-const ownPath = path.join(__dirname, "..", "packages", "chalet");
+const rootDir = path.join(__dirname, "..");
+const packagesDir = path.join(rootDir, "packages");
+
+const ownPath = path.join(packagesDir, "chalet");
 const templatePath = path.join(
-  __dirname,
-  "..",
-  "packages",
+  packagesDir,
   "create-starter-app",
   "template",
   "chalet"

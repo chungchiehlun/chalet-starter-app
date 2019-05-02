@@ -1,11 +1,14 @@
+#!/usr/bin/env node
+
+"use strict";
+
 const path = require("path");
 const execSync = require("child_process").execSync;
 const rootDir = path.join(__dirname, "..");
+const packagesDir = path.join(rootDir, "packages");
 
 const cleanup = () => {
   console.log("Cleaning up.");
-  // Uncomment when snapshot testing is enabled by default:
-  // rm ./template/src/__snapshots__/App.test.js.snap
 };
 
 const handleExit = () => {
@@ -16,6 +19,7 @@ const handleExit = () => {
 
 const handleError = e => {
   console.error("ERROR! An error was encountered while executing\n", e);
+  console.error(e);
   cleanup();
   console.log("Exiting with error.");
   process.exit(1);
@@ -24,16 +28,15 @@ const handleError = e => {
 process.on("SIGINT", handleExit);
 process.on("uncaughtException", handleError);
 
-// Run the CSA command
-const args = process.argv.slice(2);
+// Pack starter-scripts
+const scriptsFileName = execSync(`npm pack`, {
+  cwd: path.join(packagesDir, "starter-scripts")
+})
+  .toString()
+  .trim();
+const scriptsPath = path.join(packagesDir, "starter-scripts", scriptsFileName);
 
-const csaScriptPath = path.join(
-  rootDir,
-  "packages",
-  "create-starter-app",
-  "index.js"
-);
-
+// Build chalet template
 const buildChaletTemplatePath = path.join(
   __dirname,
   "build-chalet-template.js"
@@ -44,7 +47,18 @@ execSync(`node ${buildChaletTemplatePath}`, {
   stdio: "inherit"
 });
 
-execSync(`node ${csaScriptPath} ${args.join(" ")}`, {
-  cwd: rootDir,
-  stdio: "inherit"
-});
+// Run the CSA command
+const args = process.argv.slice(2);
+
+const csaScriptPath = path.join(packagesDir, "create-starter-app", "index.js");
+
+execSync(
+  `node ${csaScriptPath} ${args.join(" ")} --scripts-version="${scriptsPath}"`,
+  {
+    cwd: rootDir,
+    stdio: "inherit"
+  }
+);
+
+// Cleanup
+handleExit();
