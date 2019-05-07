@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react";
-import ReactDOM from "react-dom";
-import RestParameters from "./RestParameters";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import RestParameters from './RestParameters';
 
-describe("rest parameters", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+describe('rest parameters', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
     return new Promise(resolve => {
       ReactDOM.render(<RestParameters onReady={resolve} />, div);
     });

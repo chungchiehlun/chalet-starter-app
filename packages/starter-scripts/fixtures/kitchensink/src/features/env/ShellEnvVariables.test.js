@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react";
-import ReactDOM from "react-dom";
-import ShellEnvVariables from "./ShellEnvVariables";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ShellEnvVariables from './ShellEnvVariables';
 
-describe("shell env variables", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+describe('shell env variables', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
     ReactDOM.render(<ShellEnvVariables />, div);
   });
 });

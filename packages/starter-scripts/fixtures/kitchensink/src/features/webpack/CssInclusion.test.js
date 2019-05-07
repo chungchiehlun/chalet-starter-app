@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react";
-import ReactDOM from "react-dom";
-import CssInclusion from "./CssInclusion";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import CssInclusion from './CssInclusion';
 
-describe("css inclusion", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+describe('css inclusion', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
     ReactDOM.render(<CssInclusion />, div);
   });
 });

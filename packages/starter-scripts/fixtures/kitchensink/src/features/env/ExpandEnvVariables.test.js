@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react";
-import ReactDOM from "react-dom";
-import ExpandEnvVariables from "./ExpandEnvVariables";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ExpandEnvVariables from './ExpandEnvVariables';
 
-describe("expand .env variables", () => {
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+describe('expand .env variables', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
     ReactDOM.render(<ExpandEnvVariables />, div);
   });
 });

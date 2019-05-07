@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const fs = require("fs");
-const http = require("http");
-const jsdom = require("jsdom/lib/old-api.js");
-const path = require("path");
+const fs = require('fs');
+const http = require('http');
+const jsdom = require('jsdom/lib/old-api.js');
+const path = require('path');
 
 let getMarkup;
 export let resourceLoader;
@@ -18,10 +18,10 @@ if (process.env.E2E_FILE) {
     ? process.env.E2E_FILE
     : path.join(process.cwd(), process.env.E2E_FILE);
 
-  const markup = fs.readFileSync(file, "utf8");
+  const markup = fs.readFileSync(file, 'utf8');
   getMarkup = () => markup;
 
-  const pathPrefix = process.env.PUBLIC_URL.replace(/^https?:\/\/[^/]+\/?/, "");
+  const pathPrefix = process.env.PUBLIC_URL.replace(/^https?:\/\/[^/]+\/?/, '');
 
   resourceLoader = (resource, callback) =>
     callback(
@@ -29,18 +29,18 @@ if (process.env.E2E_FILE) {
       fs.readFileSync(
         path.join(
           path.dirname(file),
-          resource.url.pathname.replace(pathPrefix, "")
+          resource.url.pathname.replace(pathPrefix, '')
         ),
-        "utf8"
+        'utf8'
       )
     );
 } else if (process.env.E2E_URL) {
   getMarkup = () =>
     new Promise(resolve => {
       http.get(process.env.E2E_URL, res => {
-        let rawData = "";
-        res.on("data", chunk => (rawData += chunk));
-        res.on("end", () => resolve(rawData));
+        let rawData = '';
+        res.on('data', chunk => (rawData += chunk));
+        res.on('end', () => resolve(rawData));
       });
     });
 
@@ -56,10 +56,10 @@ if (process.env.E2E_FILE) {
 export default feature =>
   new Promise(async resolve => {
     const markup = await getMarkup();
-    const host = process.env.E2E_URL || "http://www.example.org/spa:3000";
+    const host = process.env.E2E_URL || 'http://www.example.org/spa:3000';
     const doc = jsdom.jsdom(markup, {
       created: (_, win) =>
-        win.addEventListener("ReactFeatureDidMount", () => resolve(doc), true),
+        win.addEventListener('ReactFeatureDidMount', () => resolve(doc), true),
       deferClose: true,
       pretendToBeVisual: true,
       resourceLoader,

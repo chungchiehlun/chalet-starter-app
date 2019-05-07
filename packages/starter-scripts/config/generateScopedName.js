@@ -1,4 +1,4 @@
-const loaderUtils = require("loader-utils");
+const loaderUtils = require('loader-utils');
 
 /*
   Babel-plugin-react-css-modules have to generate the same local identity that css-loader did.
@@ -15,21 +15,21 @@ module.exports = (localName, filepath) => {
   const fileNameOrFolder = loaderContext.resourcePath.match(
     /index\.module\.(css|scss|sass)$/
   )
-    ? "[folder]"
-    : "[name]";
+    ? '[folder]'
+    : '[name]';
 
   // Create a hash based on a the file location and class name. Will be unique across a project, and close to globally unique.
   const hash = loaderUtils.getHashDigest(
     loaderContext.resourcePath + localName,
-    "md5",
-    "base64",
+    'md5',
+    'base64',
     5
   );
 
   // loaderOptions reference
   // https://github.com/webpack-contrib/css-loader/blob/240db534fa5ee19cb5bde12570b0545af3082b5f/lib/processCss.js#L172
   const loaderOptions = {
-    hashPrefix: "",
+    hashPrefix: '',
     context: process.cwd()
   };
 
@@ -37,9 +37,9 @@ module.exports = (localName, filepath) => {
   // https://github.com/webpack/loader-utils#interpolatename
   const genericName = loaderUtils.interpolateName(
     loaderContext,
-    fileNameOrFolder + "_" + localName + "__" + hash,
+    fileNameOrFolder + '_' + localName + '__' + hash,
     loaderOptions
   );
   // remove the .module that appears in every classname when based on the file.
-  return genericName.replace(".module_", "_");
+  return genericName.replace('.module_', '_');
 };

@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-function load({ id, ...rest } = { id: 0, user: { id: 42, name: "42" } }) {
+function load({ id, ...rest } = { id: 0, user: { id: 42, name: '42' } }) {
   return [
-    { id: id + 1, name: "1" },
-    { id: id + 2, name: "2" },
-    { id: id + 3, name: "3" },
+    { id: id + 1, name: '1' },
+    { id: id + 2, name: '2' },
+    { id: id + 3, name: '3' },
     rest.user
   ];
 }

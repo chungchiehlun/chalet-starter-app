@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 function load(prefix) {
   return [
-    { id: 1, [`${prefix} name`]: "1" },
-    { id: 2, [`${prefix} name`]: "2" },
-    { id: 3, [`${prefix} name`]: "3" },
-    { id: 4, [`${prefix} name`]: "4" }
+    { id: 1, [`${prefix} name`]: '1' },
+    { id: 2, [`${prefix} name`]: '2' },
+    { id: 3, [`${prefix} name`]: '3' },
+    { id: 4, [`${prefix} name`]: '4' }
   ];
 }
 
@@ -28,7 +28,7 @@ export default class extends Component {
   }
 
   async componentDidMount() {
-    const users = load("user_");
+    const users = load('user_');
     this.setState({ users });
   }
 

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 function* load(limit) {
   let i = 1;

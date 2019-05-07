@@ -5,19 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react";
-import ReactDOM from "react-dom";
-import { test, version } from "test-integrity";
-import LinkedModules from "./LinkedModules";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { test, version } from 'test-integrity';
+import LinkedModules from './LinkedModules';
 
-describe("linked modules", () => {
-  it("has integrity", () => {
+describe('linked modules', () => {
+  it('has integrity', () => {
     expect(test());
-    expect(version() === "2.0.0");
+    expect(version() === '2.0.0');
   });
 
-  it("renders without crashing", () => {
-    const div = document.createElement("div");
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
     ReactDOM.render(<LinkedModules />, div);
   });
 });

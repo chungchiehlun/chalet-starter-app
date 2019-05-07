@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react";
-import aFileWithoutExt from "./assets/aFileWithoutExt";
+import React from 'react';
+import aFileWithoutExt from './assets/aFileWithoutExt';
 
-const text = aFileWithoutExt.includes("base64")
-  ? atob(aFileWithoutExt.split("base64,")[1]).trim()
+const text = aFileWithoutExt.includes('base64')
+  ? atob(aFileWithoutExt.split('base64,')[1]).trim()
   : aFileWithoutExt;
 
 export default () => (

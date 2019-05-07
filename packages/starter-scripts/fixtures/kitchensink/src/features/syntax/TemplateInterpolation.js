@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 function load(name) {
   return [
@@ -28,7 +28,7 @@ export default class extends Component {
   }
 
   async componentDidMount() {
-    const users = load("user_");
+    const users = load('user_');
     this.setState({ users });
   }
 
