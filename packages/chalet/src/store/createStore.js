@@ -2,11 +2,11 @@ import {
   applyMiddleware,
   compose,
   createStore as createReduxStore
-} from "redux";
-import thunk from "redux-thunk";
-import { routerMiddleware } from "connected-react-router";
-import makeRootReducer from "./reducers";
-import history from "./history";
+} from 'redux';
+import thunk from 'redux-thunk';
+import { routerMiddleware } from 'connected-react-router';
+import makeRootReducer from './reducers';
+import history from './history';
 
 const createStore = (initialState = {}) => {
   // ======================================================
@@ -20,8 +20,8 @@ const createStore = (initialState = {}) => {
   const enhancers = [];
   let composeEnhancers = compose;
 
-  if (process.env.NODE_ENV === "development") {
-    if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === "function") {
+  if (process.env.NODE_ENV === 'development') {
+    if (typeof window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ === 'function') {
       composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
     }
   }
@@ -30,11 +30,10 @@ const createStore = (initialState = {}) => {
   // Store Instantiation
   // ======================================================
   const store = createReduxStore(
-    makeRootReducer(),
+    makeRootReducer(history),
     initialState,
     composeEnhancers(applyMiddleware(...middleware), ...enhancers)
   );
-  store.asyncReducers = {};
 
   return store;
 };

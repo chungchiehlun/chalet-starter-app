@@ -1,12 +1,12 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
-import { Provider } from "react-redux";
-import PropTypes from "prop-types";
-import PageLayout from "../PageLayout";
-import Home from "../../routes/Home";
-import Counter from "../../routes/Counter";
-import "./App.module.css";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
+import PageLayout from '../PageLayout';
+import Home from '../../routes/Home';
+import Counter from '../../routes/Counter';
+import './App.module.css';
 
 class App extends React.Component {
   static propTypes = {
@@ -26,7 +26,7 @@ class App extends React.Component {
             <PageLayout />
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/counter" component={Counter(this.props.store)} />
+              <Route path="/counter" component={Counter} />
             </Switch>
           </div>
         </ConnectedRouter>
