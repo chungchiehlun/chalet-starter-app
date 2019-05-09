@@ -1,4 +1,7 @@
+'use strict';
+
 const loaderUtils = require('loader-utils');
+const path = require('path');
 
 /*
   Babel-plugin-react-css-modules have to generate the same local identity that css-loader did.
@@ -29,8 +32,7 @@ module.exports = (localName, filepath) => {
   // loaderOptions reference
   // https://github.com/webpack-contrib/css-loader/blob/240db534fa5ee19cb5bde12570b0545af3082b5f/lib/processCss.js#L172
   const loaderOptions = {
-    hashPrefix: '',
-    context: process.cwd()
+    hashPrefix: ''
   };
 
   // function that interpolate a file name template from module loader-utils.
