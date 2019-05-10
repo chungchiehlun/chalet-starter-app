@@ -19,8 +19,9 @@
   },
   "files": [
     "index.js",
-    "createStarterApp.js",
-    "yarn.lock.cached"
+    "createReactApp.js",
+    "yarn.lock.cached",
+    "template"
   ],
   "bin": {
     "create-starter-app": "./index.js"
