@@ -19,7 +19,7 @@
   },
   "files": [
     "index.js",
-    "createReactApp.js",
+    "createStarterApp.js",
     "yarn.lock.cached",
     "template"
   ],
