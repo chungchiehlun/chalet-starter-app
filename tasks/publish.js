@@ -1,17 +1,7 @@
-const path = require("path");
-const execSync = require("child_process").execSync;
-
-const buildChaletTemplatePath = path.join(
-  __dirname,
-  "build-chalet-template.js"
-);
-
-execSync(`node ${buildChaletTemplatePath}`, {
-  cwd: __dirname,
-  stdio: "inherit"
-});
+const path = require('path');
+const execSync = require('child_process').execSync;
 
 execSync(`lerna publish --no-push`, {
   cwd: __dirname,
-  stdio: "inherit"
+  stdio: 'inherit'
 });

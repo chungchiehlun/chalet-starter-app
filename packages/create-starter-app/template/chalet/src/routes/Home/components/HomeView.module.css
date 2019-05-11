@@ -1,0 +1,16 @@
+.home {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.chalet {
+  display: block;
+  width: 400px;
+  margin: 30px auto;
+}
+
+.source {
+  display: flex;
+  font-style: italic;
+}
