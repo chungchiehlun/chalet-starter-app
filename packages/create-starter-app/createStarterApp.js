@@ -197,6 +197,7 @@ function createApp(
   );
 
   const useYarn = useNpm ? false : shouldUseYarn();
+  const originalDirectory = process.cwd();
   process.chdir(root);
   if (!useYarn && !checkThatNpmCanReadCwd()) {
     process.exit(1);
