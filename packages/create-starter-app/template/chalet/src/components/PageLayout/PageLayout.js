@@ -26,6 +26,6 @@ export default connect(
   dispatch => ({
     directTo: path => {
       dispatch(push(path));
-    }
+    },
   })
 )(PageLayout);

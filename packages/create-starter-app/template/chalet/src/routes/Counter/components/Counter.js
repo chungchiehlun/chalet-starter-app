@@ -17,7 +17,7 @@ export const Counter = ({ counter, increment, doubleAsync }) => (
 Counter.propTypes = {
   counter: PropTypes.number.isRequired,
   increment: PropTypes.func.isRequired,
-  doubleAsync: PropTypes.func.isRequired
+  doubleAsync: PropTypes.func.isRequired,
 };
 
 export default Counter;

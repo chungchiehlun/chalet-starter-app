@@ -30,7 +30,7 @@ const cyan = chalk.cyan;
 function getGitStatus() {
   try {
     let stdout = execSync(`git status --porcelain`, {
-      stdio: ['pipe', 'pipe', 'ignore']
+      stdio: ['pipe', 'pipe', 'ignore'],
     }).toString();
     return stdout.trim();
   } catch (e) {
@@ -44,7 +44,7 @@ function tryGitAdd(appPath) {
       'git',
       ['add', path.join(appPath, 'config'), path.join(appPath, 'scripts')],
       {
-        stdio: 'inherit'
+        stdio: 'inherit',
       }
     );
 
@@ -67,7 +67,7 @@ inquirer
     type: 'confirm',
     name: 'shouldEject',
     message: 'Are you sure you want to eject? This action is permanent.',
-    default: false
+    default: false,
   })
   .then(answer => {
     if (!answer.shouldEject) {
@@ -232,13 +232,13 @@ inquirer
     // Add Babel config
     console.log(`  Adding ${cyan('Babel')} preset`);
     appPackage.babel = {
-      presets: ['react-app']
+      presets: ['react-app'],
     };
 
     // Add ESlint config
     console.log(`  Adding ${cyan('ESLint')} configuration`);
     appPackage.eslintConfig = {
-      extends: 'react-app'
+      extends: 'react-app',
     };
 
     fs.writeFileSync(
@@ -320,7 +320,7 @@ inquirer
     } else {
       console.log(cyan('Running npm install...'));
       spawnSync('npm', ['install', '--loglevel', 'error'], {
-        stdio: 'inherit'
+        stdio: 'inherit',
       });
     }
     console.log(green('Ejected successfully!'));

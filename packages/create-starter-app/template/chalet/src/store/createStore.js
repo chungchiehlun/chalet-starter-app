@@ -1,7 +1,7 @@
 import {
   applyMiddleware,
   compose,
-  createStore as createReduxStore
+  createStore as createReduxStore,
 } from 'redux';
 import thunk from 'redux-thunk';
 import { routerMiddleware } from 'connected-react-router';

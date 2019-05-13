@@ -44,7 +44,7 @@ describe('Integration', () => {
       doc = await initDOM('css-inclusion');
       matchCSS(doc, [
         /html\{/,
-        /#feature-css-inclusion\{background:.+;color:.+}/
+        /#feature-css-inclusion\{background:.+;color:.+}/,
       ]);
     });
 
@@ -52,7 +52,7 @@ describe('Integration', () => {
       doc = await initDOM('css-modules-inclusion');
       matchCSS(doc, [
         /.+style_cssModulesInclusion__.+\{background:.+;color:.+}/,
-        /.+assets_cssModulesIndexInclusion__.+\{background:.+;color:.+}/
+        /.+assets_cssModulesIndexInclusion__.+\{background:.+;color:.+}/,
       ]);
     });
 
@@ -65,7 +65,7 @@ describe('Integration', () => {
       doc = await initDOM('scss-modules-inclusion');
       matchCSS(doc, [
         /.+scss-styles_scssModulesInclusion.+\{background:.+;color:.+}/,
-        /.+assets_scssModulesIndexInclusion.+\{background:.+;color:.+}/
+        /.+assets_scssModulesIndexInclusion.+\{background:.+;color:.+}/,
       ]);
     });
 
@@ -78,7 +78,7 @@ describe('Integration', () => {
       doc = await initDOM('sass-modules-inclusion');
       matchCSS(doc, [
         /.+sass-styles_sassModulesInclusion.+\{background:.+;color:.+}/,
-        /.+assets_sassModulesIndexInclusion.+\{background:.+;color:.+}/
+        /.+assets_sassModulesIndexInclusion.+\{background:.+;color:.+}/,
       ]);
     });
 

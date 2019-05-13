@@ -60,7 +60,7 @@ function verifyTypeScriptSetup() {
   let ts;
   try {
     ts = require(resolve.sync('typescript', {
-      basedir: paths.appNodeModules
+      basedir: paths.appNodeModules,
     }));
   } catch (_) {
     console.error(
@@ -97,7 +97,7 @@ function verifyTypeScriptSetup() {
     // 'parsedValue' matches the output value from ts.parseJsonConfigFileContent()
     target: {
       parsedValue: ts.ScriptTarget.ES5,
-      suggested: 'es5'
+      suggested: 'es5',
     },
     lib: { suggested: ['dom', 'dom.iterable', 'esnext'] },
     allowJs: { suggested: true },
@@ -112,12 +112,12 @@ function verifyTypeScriptSetup() {
     module: {
       parsedValue: ts.ModuleKind.ESNext,
       value: 'esnext',
-      reason: 'for import() and import/export'
+      reason: 'for import() and import/export',
     },
     moduleResolution: {
       parsedValue: ts.ModuleResolutionKind.NodeJs,
       value: 'node',
-      reason: 'to match webpack resolution'
+      reason: 'to match webpack resolution',
     },
     resolveJsonModule: { value: true, reason: 'to match webpack loader' },
     isolatedModules: { value: true, reason: 'implementation limitation' },
@@ -125,15 +125,15 @@ function verifyTypeScriptSetup() {
     jsx: {
       parsedValue: ts.JsxEmit.Preserve,
       value: 'preserve',
-      reason: 'JSX is compiled by Babel'
+      reason: 'JSX is compiled by Babel',
     },
-    paths: { value: undefined, reason: 'aliased imports are not supported' }
+    paths: { value: undefined, reason: 'aliased imports are not supported' },
   };
 
   const formatDiagnosticHost = {
     getCanonicalFileName: fileName => fileName,
     getCurrentDirectory: ts.sys.getCurrentDirectory,
-    getNewLine: () => os.EOL
+    getNewLine: () => os.EOL,
   };
 
   const messages = [];

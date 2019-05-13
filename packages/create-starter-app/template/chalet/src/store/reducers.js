@@ -6,7 +6,7 @@ export const makeRootReducer = history => {
   return connectRouter(history)(
     combineReducers({
       router: connectRouter(history),
-      counter: counterReducer
+      counter: counterReducer,
     })
   );
 };

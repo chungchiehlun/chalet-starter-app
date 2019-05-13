@@ -160,7 +160,7 @@ function build(previousFileSizes) {
         }
         messages = formatWebpackMessages({
           errors: [err.message],
-          warnings: []
+          warnings: [],
         });
       } else {
         messages = formatWebpackMessages(
@@ -193,7 +193,7 @@ function build(previousFileSizes) {
       return resolve({
         stats,
         previousFileSizes,
-        warnings: messages.warnings
+        warnings: messages.warnings,
       });
     });
   });
@@ -202,6 +202,6 @@ function build(previousFileSizes) {
 function copyPublicFolder() {
   fs.copySync(paths.appPublic, paths.appBuild, {
     dereference: true,
-    filter: file => file !== paths.appHtml
+    filter: file => file !== paths.appHtml,
   });
 }

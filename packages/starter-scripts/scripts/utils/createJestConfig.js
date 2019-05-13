@@ -28,13 +28,13 @@ module.exports = (resolve, rootDir, isEjecting) => {
     setupFiles: [
       isEjecting
         ? 'react-app-polyfill/jsdom'
-        : require.resolve('react-app-polyfill/jsdom')
+        : require.resolve('react-app-polyfill/jsdom'),
     ],
 
     setupFilesAfterEnv: setupTestsFile ? [setupTestsFile] : [],
     testMatch: [
       '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
-      '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}'
+      '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}',
     ],
     testEnvironment: 'jest-environment-jsdom-fourteen',
     transform: {
@@ -44,24 +44,24 @@ module.exports = (resolve, rootDir, isEjecting) => {
       '^.+\\.css$': resolve('config/jest/cssTransform.js'),
       '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': resolve(
         'config/jest/fileTransform.js'
-      )
+      ),
     },
     transformIgnorePatterns: [
       '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
-      '^.+\\.module\\.(css|sass|scss)$'
+      '^.+\\.module\\.(css|sass|scss)$',
     ],
     modulePaths: modules.additionalModulePaths || [],
     moduleNameMapper: {
       '^react-native$': 'react-native-web',
-      '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy'
+      '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
     },
     moduleFileExtensions: [...paths.moduleFileExtensions, 'node'].filter(
       ext => !ext.includes('mjs')
     ),
     watchPlugins: [
       'jest-watch-typeahead/filename',
-      'jest-watch-typeahead/testname'
-    ]
+      'jest-watch-typeahead/testname',
+    ],
   };
   if (rootDir) {
     config.rootDir = rootDir;
@@ -77,7 +77,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
     'resetMocks',
     'resetModules',
     'snapshotSerializers',
-    'watchPathIgnorePatterns'
+    'watchPathIgnorePatterns',
   ];
   if (overrides) {
     supportedKeys.forEach(key => {

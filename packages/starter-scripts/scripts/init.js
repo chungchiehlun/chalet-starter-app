@@ -54,7 +54,7 @@ function tryGitInit(appPath) {
 
     execSync('git add -A', { stdio: 'ignore' });
     execSync('git commit -m "Initial commit from Create React App"', {
-      stdio: 'ignore'
+      stdio: 'ignore',
     });
     return true;
   } catch (e) {
@@ -98,12 +98,12 @@ module.exports = function(
     start: 'react-scripts start',
     build: 'react-scripts build',
     test: 'react-scripts test',
-    eject: 'react-scripts eject'
+    eject: 'react-scripts eject',
   };
 
   // Setup the eslint config
   appPackage.eslintConfig = {
-    extends: 'react-app'
+    extends: 'react-app',
   };
 
   // Setup the browsers list

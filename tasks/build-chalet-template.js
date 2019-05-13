@@ -1,25 +1,25 @@
 #!/usr/bin/env node
 
-"use strict";
+'use strict';
 
-const fs = require("fs-extra");
-const path = require("path");
-const rootDir = path.join(__dirname, "..");
-const packagesDir = path.join(rootDir, "packages");
+const fs = require('fs-extra');
+const path = require('path');
+const rootDir = path.join(__dirname, '..');
+const packagesDir = path.join(rootDir, 'packages');
 
-const ownPath = path.join(packagesDir, "chalet");
+const ownPath = path.join(packagesDir, 'chalet');
 const templatePath = path.join(
   packagesDir,
-  "create-starter-app",
-  "template",
-  "chalet"
+  'create-starter-app',
+  'template',
+  'chalet'
 );
 
 fs.ensureDirSync(templatePath);
 fs.emptyDirSync(templatePath);
 
 // copy public/ ,src/, gitignore to template folder
-["public", "src", "gitignore"].forEach(folderName => {
+['public', 'src', 'gitignore'].forEach(folderName => {
   fs.copySync(
     path.join(ownPath, folderName),
     path.join(templatePath, folderName)
@@ -27,10 +27,10 @@ fs.emptyDirSync(templatePath);
 });
 
 // create .template.dependencies.json from package.json
-const ownPackage = require(path.join(ownPath, "package.json")).dependencies;
+const ownPackage = require(path.join(ownPath, 'package.json')).dependencies;
 const necessaryPackage = Object.keys(ownPackage)
   .filter(
-    pkgName => !["react", "react-dom", "starter-scripts"].includes(pkgName)
+    pkgName => !['react', 'react-dom', 'starter-scripts'].includes(pkgName)
   )
   .reduce((result, pkgName) => {
     result[pkgName] = ownPackage[pkgName];
@@ -38,12 +38,14 @@ const necessaryPackage = Object.keys(ownPackage)
   }, {});
 
 fs.writeFileSync(
-  path.join(templatePath, ".template.dependencies.json"),
+  path.join(templatePath, '.template.dependencies.json'),
   JSON.stringify(
     {
-      dependencies: necessaryPackage
+      dependencies: necessaryPackage,
     },
     null,
     2
   )
 );
+
+fs.appendFileSync(path.join(templatePath, '.template.dependencies.json'), '\n');

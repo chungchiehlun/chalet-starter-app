@@ -11,7 +11,7 @@ const path = require('path');
 */
 module.exports = (localName, filepath) => {
   const loaderContext = {
-    resourcePath: filepath
+    resourcePath: filepath,
   };
 
   // Use the filename or folder name, based on some uses the index.js / index.module.(css|scss|sass) project style.
@@ -32,7 +32,7 @@ module.exports = (localName, filepath) => {
   // loaderOptions reference
   // https://github.com/webpack-contrib/css-loader/blob/240db534fa5ee19cb5bde12570b0545af3082b5f/lib/processCss.js#L172
   const loaderOptions = {
-    hashPrefix: ''
+    hashPrefix: '',
   };
 
   // function that interpolate a file name template from module loader-utils.

@@ -51,13 +51,13 @@ export default feature =>
           pretendToBeVisual: true,
           resources: fileResourceLoader,
           runScripts: 'dangerously',
-          url
+          url,
         })).window;
       } else {
         window = (await JSDOM.fromURL(url, {
           pretendToBeVisual: true,
           resources: 'usable',
-          runScripts: 'dangerously'
+          runScripts: 'dangerously',
         })).window;
       }
 

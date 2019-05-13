@@ -13,13 +13,13 @@ function load(id = 0) {
     { id: id + 1, name: '1' },
     { id: id + 2, name: '2' },
     { id: id + 3, name: '3' },
-    { id: id + 4, name: '4' }
+    { id: id + 4, name: '4' },
   ];
 }
 
 export default class extends Component {
   static propTypes = {
-    onReady: PropTypes.func.isRequired
+    onReady: PropTypes.func.isRequired,
   };
 
   constructor(props) {
