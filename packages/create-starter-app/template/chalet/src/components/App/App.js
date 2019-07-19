@@ -8,31 +8,27 @@ import Home from '../../routes/Home';
 import Counter from '../../routes/Counter';
 import './App.module.css';
 
-class App extends React.Component {
-  static propTypes = {
-    store: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-  };
+const a = Counter;
 
-  shouldComponentUpdate() {
-    return false;
-  }
+const App = props => {
+  return (
+    <Provider store={props.store}>
+      <ConnectedRouter history={props.history}>
+        <div styleName="app">
+          <PageLayout />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/counter" component={Counter} />
+          </Switch>
+        </div>
+      </ConnectedRouter>
+    </Provider>
+  );
+};
 
-  render() {
-    return (
-      <Provider store={this.props.store}>
-        <ConnectedRouter history={this.props.history}>
-          <div styleName="app">
-            <PageLayout />
-            <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/counter" component={Counter} />
-            </Switch>
-          </div>
-        </ConnectedRouter>
-      </Provider>
-    );
-  }
-}
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+};
 
 export default App;
