@@ -1,53 +1,62 @@
 # Create Starter App
 
-[create-react-app (CRA)](https://github.com/facebook/create-react-app): Create React apps with no build configuration.
+**Create-starter-app (CSA)** underlies the powerful tool [create-react-app (CRA)](https://github.com/facebook/create-react-app) . It is not an alternatvie of CRA but contains all CSA features and more useful configuration.
 
-**create-starter-app (CSA)**: Create React apps equipped with _redux ecosystem_, _more postcss plugins_ and _every CRA feature_ .
+The main difference between CSA and CRA is that CSA contains global command [create-starter-app](https://www.npmjs.com/package/create-starter-app) and its custom scripts [starter-scripts](https://www.npmjs.com/package/starter-scripts). Here is a concise introduction.
+
+- `create-starter-app`: A cli tool which arguments and options are as same as CRA. Furthermore, it offers the `--template (-T)` option. You could choose a template but the CRA built-in one. See [Template](#Template).
+- `starter-scripts`: A node script works as same as react-scripts and uses [react-css-modules](https://github.com/gajus/react-css-modules) and more postcss plugins. See [Feature](#Feature).
 
 ## Getting Started
 
-**Create-starter-app (CSA)** was based on _create-react-app_. Accordingly, please run `yarn global add create-react-app` at first if you never used it. CSA contained global command [create-starter-app](https://www.npmjs.com/package/create-starter-app) and its custom scripts [starter-scripts](https://www.npmjs.com/package/starter-scripts). Further, choose a [template](#template) to launch your project. If you do not choose one, it applied the _chalet_ as default.
-
 ```sh
-$ npx create-starter-app my-app
-$ cd my-app/
-$ npm start
+$ npx create-starter-app my-app -T chalet
 ```
 
-Then open [http://localhost:3000/](http://localhost:3000/) to see your app.
+It will create a directory called `my-app` inside the current folder. Inside that directory, there's no configuration or complicated folder structures, just the files you need to build you app.
 
-## template options
+```
+// Once the installation is done, you can open your project folder.
+$ cd my-app
+
+// Runs the app in development mode.
+// Open http://localhost:3000 to view it in the browser
+$ npm start or yarn start
+
+// Runs the test watcher in an interactive mode.
+$ npm test or yarn test
+
+// Builds the app for production to the *build* folder.
+$ npm run build or yarn build
+```
+
+The document of CRA is useful and elaborate. Feel free to apply features of CRA to CSA. You could get more information from the official [User Guide](https://facebook.github.io/create-react-app/docs/getting-started). If something doesn't work, please file an issue.
+
+### Template
+
+Choose a template to launch your project. CSA offers a elaborate `chalet` template which contains useful packges from react/redux ecosystem and basic scaffolding.
 
 ```bash
-$ npx create-starter-app my-app --template <option>
+$ npx create-starter-app my-app --template chalet
 ```
 
-**plain**
+###Feature
 
-Original [template](https://github.com/facebookincubator/create-react-app/tree/master/packages/react-scripts/template) from `create-react-app` contains react but redux.
-
-**chalet**
-
-Project ready template use the underlying [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit) that contains _react_, _redux_, _redux-thunk_, _react-router_ and _connected-react-router_.
-
-## starter-sciprts features
-
-> 🎉 [CRA 2.0](https://reactjs.org/blog/2018/10/01/create-react-app-v2.html) has been released and integrated with CSA. 🎉
-
-**combine css-module with react**
+**[react-css-modules](https://github.com/gajus/react-css-modules)**
 
 ```jsx
-import 'styleContainsBar.module.css'
+import './hello.module.css'
 
 <span styleName='Bar'>World</span>
-// Bar is local css and do not pollute any other css stylesheet.
+// Bar is css class name defined in `hello.module.css` and do not pollute any other css stylesheet.
 ```
 
-**more postcss feature**
+**Postcss plugins**
 
 - [postcss-preset-env](https://github.com/csstools/postcss-preset-env) ( _stage: 0_ )
-
 - [lost](https://github.com/peterramsing/lost)
+
+> I merely applied these to my projects. If you hopes to integrate other plugins with starter-scripts, feel free to search from [here](https://github.com/postcss/postcss/blob/master/docs/plugins.md) and tell me how you apply the plugin(s) to your projects.
 
 ## License
 
