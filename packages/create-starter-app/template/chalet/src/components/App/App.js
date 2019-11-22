@@ -8,8 +8,6 @@ import Home from '../../routes/Home';
 import Counter from '../../routes/Counter';
 import './App.module.css';
 
-const a = Counter;
-
 const App = props => {
   return (
     <Provider store={props.store}>
