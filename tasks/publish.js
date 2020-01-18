@@ -1,7 +1,7 @@
 const path = require('path');
 const execSync = require('child_process').execSync;
 
-execSync(`lerna publish --no-push`, {
+execSync(`npm punlish`, {
   cwd: __dirname,
   stdio: 'inherit',
 });

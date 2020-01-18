@@ -5,7 +5,7 @@
   ],
   "scripts": {
     "publish": "node tasks/publish.js",
-    "create-starter-app": "node tasks/csa.js"
+    "create-react-app": "node tasks/cra.js"
   },
   "husky": {
     "hooks": {

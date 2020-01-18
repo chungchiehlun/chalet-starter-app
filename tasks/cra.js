@@ -36,24 +36,11 @@ const scriptsFileName = execSync(`npm pack`, {
   .trim();
 const scriptsPath = path.join(packagesDir, 'starter-scripts', scriptsFileName);
 
-// Build chalet template
-const buildChaletTemplatePath = path.join(
-  __dirname,
-  'build-chalet-template.js'
-);
-
-execSync(`node ${buildChaletTemplatePath}`, {
-  cwd: __dirname,
-  stdio: 'inherit',
-});
-
-// Run the CSA command
+// Run the CRA command
 const args = process.argv.slice(2);
 
-const csaScriptPath = path.join(packagesDir, 'create-starter-app', 'index.js');
-
 execSync(
-  `node ${csaScriptPath} ${args.join(' ')} --scripts-version="${scriptsPath}"`,
+  `npx create-react-app ${args.join(' ')} --scripts-version="${scriptsPath}"`,
   {
     cwd: rootDir,
     stdio: 'inherit',
