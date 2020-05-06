@@ -4,7 +4,6 @@
     "packages/*"
   ],
   "scripts": {
-    "publish": "node tasks/publish.js",
     "create-react-app": "node tasks/cra.js"
   },
   "husky": {
