@@ -35,6 +35,7 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
 const postcssNormalize = require('postcss-normalize');
+const postcssLoadConfig = require('postcss-load-config');
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -59,9 +60,18 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-// For react-css-module
+// react-css-module
 const generateScopedName = require('./generateScopedName');
 const getCSSModuleLocalIdent = require('./getCSSModuleLocalIdent');
+
+// Add custom postcss plugins
+const postcssPlugins = () => {
+  try {
+    return postcssLoadConfig.sync().plugins;
+  } catch (error) {
+    return [];
+  }
+};
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -117,6 +127,8 @@ module.exports = function(webpackEnv) {
             // so that it honors browserslist config in package.json
             // which in turn let's users customize the target behavior as per their needs.
             postcssNormalize(),
+            // Add custom postcss plugins
+            ...postcssPlugins(),
           ],
           sourceMap: isEnvProduction && shouldUseSourceMap,
         },

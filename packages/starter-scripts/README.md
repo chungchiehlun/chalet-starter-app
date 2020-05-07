@@ -39,11 +39,23 @@ If you created project with typescript template, replace `types="react-scripts" 
 
 ### Why use `starter-scripts` instead of `react-scripts` ?
 
-This package has a custom attribute `styleName` make you combine react and css-module in a concise way. (see more on **[react-css-modules](https://github.com/gajus/react-css-modules)**)
+1. Enjoy a custom attribute `styleName` make you combine react and css-module in a concise way. (see more on **[react-css-modules](https://github.com/gajus/react-css-modules)**)
 
-```jsx
-import './hello.module.css'
+   ```jsx
+   // component.jsx
+   import './hello.module.css'
 
-<span styleName='bar'>World</span>
-// "bar" is a class name defined in `hello.module.css` and do not pollute any other class.
-```
+   <span styleName='bar'>World</span>
+   // "bar" is a class name defined in `hello.module.css` and do not pollute any other class.
+   ```
+
+2. Enjoy your custom css plugins. Install all required postcss plugins and add `postcss.config.js` in the project root.
+
+   ```javascript
+   // postcss.config.js
+   module.exports = {
+     plugins: {
+       'postcss-plugin': {},
+     },
+   };
+   ```
