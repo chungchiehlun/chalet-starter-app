@@ -6,7 +6,7 @@ A custom fork of `react-scripts`. This package includes scripts and configuratio
 
 ### Getting Started
 
-Create an App or update an existing project
+Create an App
 
 ```bash
 $ yarn create react-app --scripts-version starter-scripts my-app

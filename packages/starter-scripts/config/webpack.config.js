@@ -425,6 +425,12 @@ module.exports = function(webpackEnv) {
                 // @remove-on-eject-end
                 plugins: [
                   [
+                    require.resolve('babel-plugin-react-css-modules'),
+                    {
+                      generateScopedName,
+                    },
+                  ],
+                  [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
                       loaderMap: {
